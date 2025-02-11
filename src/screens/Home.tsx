@@ -10,15 +10,15 @@ export default function Home() {
     const [borderStyleTopInput, setBorderStyleTopInput] = useState("border border-gray-300");
 
     const currencies = [
-        { simbol: "R$", code: "BRL", flag: "🇧🇷" }, // Real brasileiro
-        { simbol: "$", code: "USD", flag: "🇺🇸" }, // Dólar americano
-        { simbol: "€", code: "EUR", flag: "🇪🇺" }, // Euro
-        { simbol: "£", code: "GBP", flag: "🇬🇧" }, // Libra esterlina
-        { simbol: "CHF", code: "CHF", flag: "🇨🇭" }, // Franco suíço
-        { simbol: "¥", code: "JPY", flag: "🇯🇵" }, // Iene japonês
-        { simbol: "$", code: "CAD", flag: "🇨🇦" }, // Dólar canadense
-        { simbol: "¥", code: "CNY", flag: "🇨🇳" }, // Yuan chinês
-        { simbol: "₹", code: "INR", flag: "🇮🇳" } // Rupia indiana
+        { simbol: "R$", code: "BRL", flag: "🇧🇷", name: "Real brasileiro" },
+        { simbol: "$", code: "USD", flag: "🇺🇸", name: "Dólar americano" },
+        { simbol: "€", code: "EUR", flag: "🇪🇺", name: "Euro" },
+        { simbol: "£", code: "GBP", flag: "🇬🇧", name: "Libra esterlina" },
+        { simbol: "CHF", code: "CHF", flag: "🇨🇭", name: "Franco suíço" },
+        { simbol: "¥", code: "JPY", flag: "🇯🇵", name: "Iene japonês" },
+        { simbol: "$", code: "CAD", flag: "🇨🇦", name: "Dólar canadense" },
+        { simbol: "¥", code: "CNY", flag: "🇨🇳", name: "Yuan chinês" },
+        { simbol: "₹", code: "INR", flag: "🇮🇳", name: "Rupia indiana" }
     ];
     
     const [selectedCurrencyTop, setSelectedCurrencyTop] = useState(currencies[1]); // USD padrão
@@ -53,7 +53,7 @@ export default function Home() {
             }
 
             // Fazendo a conversão
-            const result = (parseFloat(inputValue) * rate).toFixed(2);
+            const result = (parseFloat(inputValue) * rate).toFixed(3);
             setConvertedValue(result);
 
         } catch (error) {
@@ -103,7 +103,9 @@ export default function Home() {
                                 defaultValue={selectedCurrencyTop}
                                 dropdownStyle={{ borderRadius: 10, marginTop: -30, height: 160 }}
                                 onSelect={(selectedItem) => {
-                                    setSelectedCurrencyTop(selectedItem)
+                                    setSelectedCurrencyTop(selectedItem);
+                                    setInputValue('');
+                                    setConvertedValue('');
                                 }}
                                 renderButton={(selectedItem) => (
                                     <View className="flex-row items-center justify-center h-[56px] w-[112px] rounded-xl">
@@ -136,7 +138,6 @@ export default function Home() {
                             </TouchableOpacity>
                         </View>
 
-
                         {/* RESULT */}
                         <View className={`w-full h-[56px] py-[16px] pl-[16px] rounded-xl flex-row items-center border border-gray-300`}>
                             <Text className="font-regular">{selectedCurrencyBottom.simbol}</Text>
@@ -153,6 +154,8 @@ export default function Home() {
                                 dropdownStyle={{ borderRadius: 10, marginTop: -30, height: 160 }}
                                 onSelect={(selectedItem) => {
                                     setSelectedCurrencyBottom(selectedItem);
+                                    setInputValue('');
+                                    setConvertedValue('');
                                 }}
                                 renderButton={(selectedItem) => (
                                     <View className="flex-row items-center justify-center h-[56px] w-[112px] rounded-xl">
