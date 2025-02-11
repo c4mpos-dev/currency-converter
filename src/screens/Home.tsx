@@ -123,9 +123,9 @@ export default function Home() {
                         {/* BUTTON */}
                         <View className="mt-[16px] mb-[16px]">
                             <TouchableOpacity 
-                                className="flex-row h-[40px] w-[150px] px-3 my-[5px] bg-purple-base items-center shadow-lg shadow-black/80 rounded-xl"
-                                onPress={handleConversion} // Chama a função que faz a conversão
-                                disabled={loading} // Desabilita o botão quando está carregando
+                                className={`flex-row h-[40px] w-[150px] px-3 my-[5px] items-center shadow-lg shadow-black/80 rounded-xl ${loading ? 'bg-purple-500' : 'bg-purple-base'}`}
+                                disabled={loading} 
+                                onPress={handleConversion}
                             >
                                 { loading ? (
                                     <ActivityIndicator size="small" color="white" />
@@ -135,6 +135,7 @@ export default function Home() {
                                 <Text className="text-white font-bold ml-[15px]">Converter</Text>
                             </TouchableOpacity>
                         </View>
+
 
                         {/* RESULT */}
                         <View className={`w-full h-[56px] py-[16px] pl-[16px] rounded-xl flex-row items-center border border-gray-300`}>
