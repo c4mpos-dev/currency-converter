@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Text, View, Image, TextInput, ActivityIndicator, Alert, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { ArrowDownUp } from "lucide-react-native";
+import { ArrowDownUp, MoveRight } from "lucide-react-native";
 import logo from "@assets/logo.png";
 import Divider from "@components/Divider";
 import SelectDropdown from "react-native-select-dropdown";
@@ -68,15 +68,22 @@ export default function Home() {
         <SafeAreaView className="flex-1 w-full items-center justify-center bg-gray-400">
             <Image source={logo} className="mt-[40px] w-[140px] h-[32px]" />
 
-            <View className="flex-1 w-full mt-[120px] px-[20px]">
+            {/* DESCRIÇÃO DA CONVERSÃO */}
+            <View className="flex-row items-center gap-4 mt-32">
+                <Text className="font-bold text-md text-gray-100 ">{selectedCurrencyTop.name}</Text>
+                <MoveRight color="black" />
+                <Text className="font-bold text-md text-gray-100">{selectedCurrencyBottom.name}</Text>
+            </View>
+
+            <View className="flex-1 w-full mt-8 px-[20px]">
                 <View className="w-full px-[24px] py-[40px] bg-white shadow-xl shadow-black/50 rounded-xl">
+                    {/* TITULO e SUBTITULO */}
                     <View className="gap-[8px]">
                         <Text className="text-md font-semibold text-gray-100">Conversor de moedas</Text>
                         <Text className="text-sm font-regular text-gray-200">
                             Digite o valor e escolha as moedas de conversão
                         </Text>
                     </View>
-
                     
                     <View className="w-full mt-[40px] items-center">
                         {/* INPUT */}
