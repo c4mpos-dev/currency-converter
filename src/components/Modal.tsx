@@ -1,8 +1,6 @@
-import { Modal as ReactNativeModal, TouchableOpacity, View, Text, Image } from 'react-native';
 import { Dispatch, SetStateAction } from 'react';
+import { Modal as ReactNativeModal, TouchableOpacity, View, Text } from 'react-native';
 import { Check } from 'lucide-react-native';
-
-import logo from "@assets/logo.png";
 
 type ModalProps = {
     isModalVisible: boolean;

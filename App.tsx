@@ -1,7 +1,8 @@
-import { StatusBar, Text, View } from 'react-native';
-
-import { useFonts, Inter_400Regular, Inter_600SemiBold } from '@expo-google-fonts/inter';
+import { StatusBar, View } from 'react-native';
 import "./global.css";
+import { useFonts, Inter_400Regular, Inter_600SemiBold } from '@expo-google-fonts/inter';
+
+import { Loading } from '@components/Loading';
 
 import Home from "@screens/Home";
 
@@ -15,7 +16,7 @@ export default function App() {
         backgroundColor="transparent"
         translucent
       />
-      {fontsLoaded ? <Home/> : <Home/>}
+      {fontsLoaded ? <Home/> : <Loading/>}
     </View>
   );
 }
