@@ -5,6 +5,7 @@ import { ArrowDownUp, MoveRight } from "lucide-react-native";
 import logo from "@assets/logo.png";
 import Divider from "@components/Divider";
 import SelectDropdown from "react-native-select-dropdown";
+import Modal from "@components/Modal";
 
 export default function Home() {
     const [borderStyleTopInput, setBorderStyleTopInput] = useState("border border-gray-300");
@@ -24,14 +25,21 @@ export default function Home() {
     const [selectedCurrencyTop, setSelectedCurrencyTop] = useState(currencies[1]); // USD padrão
     const [selectedCurrencyBottom, setSelectedCurrencyBottom] = useState(currencies[0]); // BRL padrão
 
-    const [inputValue, setInputValue] = useState(""); // Valor digitado
-    const [convertedValue, setConvertedValue] = useState(""); // Valor convertido
+    const [inputValue, setInputValue] = useState(''); // Valor digitado
+    const [convertedValue, setConvertedValue] = useState(''); // Valor convertido
+
     const [loading, setLoading] = useState(false);
+
+    const [isModalVisible, setModalVisible] = useState(false);
+    const [titleModal, setTitleModal] = useState('');
+    const [descriptionModal, setDescriptionModal] = useState('');
 
     // Função que faz a conversão diretamente após carregar as taxas
     const handleConversion = async () => {
         if (!inputValue) {
-            Alert.alert("Campo vazio", "Digite um valor a ser convertido.");
+            setTitleModal("Campo vazio")
+            setDescriptionModal("Informe um valor a ser convertido.")
+            setModalVisible(true);
             return;
         }
 
@@ -43,12 +51,13 @@ export default function Home() {
             const response = await fetch(`https://economia.awesomeapi.com.br/json/last/${codeToCode}`);
             const data = await response.json();
 
-            const rateKey = `${selectedCurrencyTop.code}${selectedCurrencyBottom.code}`; // Ex: "USDBRL"
+            const rateKey = `${selectedCurrencyTop.code}${selectedCurrencyBottom.code}`;
             const rate = parseFloat(data[rateKey]?.bid); // Pega a taxa de venda (bid)
 
             if (!rate) {
-                Alert.alert("Erro", "Taxa de câmbio não encontrada.");
-                setConvertedValue("");
+                setTitleModal("Erro")
+                setDescriptionModal("Taxa de câmbio não encontrada.")
+                setModalVisible(true);
                 return;
             }
 
@@ -74,6 +83,14 @@ export default function Home() {
                 <MoveRight color="black" />
                 <Text className="font-bold text-md text-gray-100">{selectedCurrencyBottom.name}</Text>
             </View>
+
+            {/* MODAL */}
+            <Modal  
+                isModalVisible={isModalVisible} 
+                setModalVisible={setModalVisible} 
+                title={titleModal}
+                description={descriptionModal}
+            />
 
             <View className="flex-1 w-full mt-8 px-[20px]">
                 <View className="w-full px-[24px] py-[40px] bg-white shadow-xl shadow-black/50 rounded-xl">
