@@ -22,8 +22,8 @@ export default function Home() {
         { simbol: "₹", code: "INR", flag: "🇮🇳", name: "Rupia indiana" }
     ];
     
-    const [selectedCurrencyTop, setSelectedCurrencyTop] = useState(currencies[1]); // USD padrão
-    const [selectedCurrencyBottom, setSelectedCurrencyBottom] = useState(currencies[0]); // BRL padrão
+    const [selectedCurrencyTop, setSelectedCurrencyTop] = useState(currencies.find(c => c.code === "USD") || currencies[0]); // USD PADRÃO
+    const [selectedCurrencyBottom, setSelectedCurrencyBottom] = useState(currencies.find(c => c.code === "BRL") || currencies[1]); // BRL PADRÃO
 
     const [inputValue, setInputValue] = useState(''); // Valor digitado
     const [convertedValue, setConvertedValue] = useState(''); // Valor convertido
@@ -87,7 +87,7 @@ export default function Home() {
             />
 
             {/* QUADRADO PRINCIPAL */}
-            <View className="flex-1 w-full justify-center px-[20px] mb-40">
+            <View className="flex-1 w-full justify-center px-[20px] mb-[100px]">
 
                 {/* DESCRIÇÃO DA CONVERSÃO */}
                 <View className="flex-row items-center justify-center gap-4 mb-5">
