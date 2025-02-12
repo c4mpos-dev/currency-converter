@@ -20,7 +20,7 @@ export default function Modal({ isModalVisible, setModalVisible, title, descript
             statusBarTranslucent
             onRequestClose={() => setModalVisible(false)}
         >  
-            <View className='flex-1 bg-black/40 items-center justify-center'>
+            <View className='flex-1 bg-black/50 items-center justify-center'>
                 <View className='w-[355px] h-[225px] py-7 px-6 justify-between bg-gray-400 rounded-lg'>
                     <Text className='font-bold text-[20px] text-gray-200 mt-[-10px] ml-[-2px]'>{title}</Text>
                     <Text className='font-regular text-md text-gray-200 text-center px-7'>{description}</Text>

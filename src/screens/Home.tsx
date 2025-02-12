@@ -66,8 +66,9 @@ export default function Home() {
             setConvertedValue(result);
 
         } catch (error) {
-            console.error("Erro durante a conversão:", error);
-            Alert.alert("Erro", "Falha ao buscar dados de conversão.");
+            setTitleModal("Erro")
+            setDescriptionModal("Falha ao buscar dados de conversão.")
+            setModalVisible(true);
         } finally {
             setLoading(false);
         }
@@ -77,13 +78,6 @@ export default function Home() {
         <SafeAreaView className="flex-1 w-full items-center justify-center bg-gray-400">
             <Image source={logo} className="mt-[40px] w-[140px] h-[32px]" />
 
-            {/* DESCRIÇÃO DA CONVERSÃO */}
-            <View className="flex-row items-center gap-4 mt-32">
-                <Text className="font-bold text-md text-gray-100 ">{selectedCurrencyTop.name}</Text>
-                <MoveRight color="black" />
-                <Text className="font-bold text-md text-gray-100">{selectedCurrencyBottom.name}</Text>
-            </View>
-
             {/* MODAL */}
             <Modal  
                 isModalVisible={isModalVisible} 
@@ -92,7 +86,16 @@ export default function Home() {
                 description={descriptionModal}
             />
 
-            <View className="flex-1 w-full mt-8 px-[20px]">
+            {/* QUADRADO PRINCIPAL */}
+            <View className="flex-1 w-full justify-center px-[20px] mb-40">
+
+                {/* DESCRIÇÃO DA CONVERSÃO */}
+                <View className="flex-row items-center justify-center gap-4 mb-5">
+                    <Text className="font-bold text-md text-gray-100 ">{selectedCurrencyTop.name}</Text>
+                    <MoveRight color="black" />
+                    <Text className="font-bold text-md text-gray-100">{selectedCurrencyBottom.name}</Text>
+                </View>
+
                 <View className="w-full px-[24px] py-[40px] bg-white shadow-xl shadow-black/50 rounded-xl">
                     {/* TITULO e SUBTITULO */}
                     <View className="gap-[8px]">
