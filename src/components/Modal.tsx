@@ -18,10 +18,10 @@ export default function Modal({ isModalVisible, setModalVisible, title, descript
             statusBarTranslucent
             onRequestClose={() => setModalVisible(false)}
         >  
-            <View className='flex-1 bg-black/50 items-center justify-center'>
-                <View className='w-[355px] h-[225px] py-7 px-6 justify-between bg-gray-400 rounded-lg'>
-                    <Text className='font-bold text-[20px] text-gray-200 mt-[-10px] ml-[-2px]'>{title}</Text>
-                    <Text className='font-regular text-md text-gray-200 text-center px-7'>{description}</Text>
+            <View className='flex-1 bg-black/50 items-center justify-center dark:bg-black/80'>
+                <View className='w-[355px] h-[225px] py-7 px-6 justify-between bg-gray-400 rounded-lg dark:bg-gray-90 dark:border-[0.1px] dark:border-white'>
+                    <Text className='font-bold text-[20px] text-gray-200 mt-[-10px] ml-[-2px] dark:text-white'>{title}</Text>
+                    <Text className='font-regular text-md text-gray-200 text-center px-7 dark:text-white'>{description}</Text>
                     
                     <View className='flex-row justify-center w-full'>
                         <TouchableOpacity className='flex-row items-center justify-center gap-3 py-4 w-40 bg-purple-base rounded-md' onPress={() => setModalVisible(false)}>
