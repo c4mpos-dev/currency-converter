@@ -11,10 +11,10 @@ export default function App() {
   const [fontsLoaded] = useFonts({ Inter_400Regular, Inter_600SemiBold });
 
   return (
-      <View className='flex-1 items-center justify-center'>
-        <ThemeProvider>
-          {fontsLoaded ? <Home/> : <Loading/>}
-        </ThemeProvider>
-      </View>
+    <View className='flex-1 items-center justify-center'>
+      <ThemeProvider>
+        {fontsLoaded ? <Home/> : <Loading/>}
+      </ThemeProvider>
+    </View>
   );
 }
