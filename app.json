@@ -8,6 +8,7 @@
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
+      "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#EDE9FE"
     },
@@ -18,13 +19,19 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-iconCC.png",
         "backgroundColor": "#EDE9FE"
-      }
+      },
+      "package": "com.cauacampos.currencyconverter"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
       "expo-font"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "e79e8008-2c3c-45ad-b2db-fe2821e0de4d"
+      }
+    }
   }
 }
