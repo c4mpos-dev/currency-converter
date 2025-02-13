@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Text, View, Image, TextInput, ActivityIndicator, TouchableOpacity } from "react-native";
+import { Text, View, Image, TextInput, ActivityIndicator, TouchableOpacity, StatusBar, Switch } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import SelectDropdown from "react-native-select-dropdown";
 import { ArrowDownUp, MoveRight, Sun, Moon } from "lucide-react-native";
@@ -8,6 +8,7 @@ import logo from "@assets/logo.png";
 
 import Divider from "@components/Divider";
 import Modal from "@components/Modal";
+
 import { useTheme } from "@context/ThemeProvider";
 
 export default function Home() {
@@ -38,7 +39,7 @@ export default function Home() {
     const [loading, setLoading] = useState(false);
 
     const { theme, toggleTheme } = useTheme();
-    const placeholderColor = theme === "dark" ? "#FFF" : "#0F172A";
+    const colorFixed = theme === "dark" ? "#FFF" : "#0F172A";
 
     async function handleConversion() {
         if (!inputValue) {
@@ -81,13 +82,19 @@ export default function Home() {
 
     return (
         <SafeAreaView className="flex-1 w-full items-center justify-center bg-gray-400 dark:bg-gray-80">
+            <StatusBar 
+                barStyle={theme === "dark" ? "light-content" : "dark-content"}
+                backgroundColor="transparent"
+                translucent
+            />
+
             <Image source={logo} className="w-[140px] h-[32px] mt-5"/>
             
             <TouchableOpacity 
                 onPress={toggleTheme} 
-                className="p-3 rounded-full bg-gray-300 ml-auto mr-5 mt-[-37px] dark:bg-gray-700"
+                className="p-3 rounded-full bg-purple-base ml-auto mr-5 mt-[-37px]"
             >
-                {theme === "dark" ? <Moon color="black" size={24} /> : <Sun color="yellow" size={24} />}
+                {theme === "dark" ? <Moon color="white" size={24} /> : <Sun color="white" size={24} />}
             </TouchableOpacity>
             
             {/* MODAL */}
@@ -103,7 +110,7 @@ export default function Home() {
                 {/* DESCRIÇÃO DA CONVERSÃO */}
                 <View className="flex-row items-center justify-center gap-4 mb-5">
                     <Text className="font-bold text-md text-gray-100 dark:text-white">{selectedCurrencyTop.name}</Text>
-                    <MoveRight color="white"/>
+                    <MoveRight color={colorFixed}/>
                     <Text className="font-bold text-md text-gray-100 dark:text-white">{selectedCurrencyBottom.name}</Text>
                 </View>
 
@@ -124,7 +131,7 @@ export default function Home() {
                             <TextInput
                                 className="flex-1 h-[56px] font-regular color-gray-100 text-[15px] ml-1 dark:text-white"
                                 placeholder="Digite um valor"
-                                placeholderTextColor={placeholderColor}
+                                placeholderTextColor={colorFixed}
                                 keyboardType="numeric"
                                 value={inputValue}
                                 onChangeText={(text) => {

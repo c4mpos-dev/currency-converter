@@ -14,7 +14,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     function toggleTheme() {
         const newTheme = theme === "light" ? "dark" : "light";
         setTheme(newTheme);
-        setColorScheme(newTheme); // Altera a classe do NativeWind
+        setColorScheme(newTheme);
     }
 
     return (
