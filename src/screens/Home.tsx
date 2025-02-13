@@ -1,13 +1,15 @@
 import { useState } from "react";
-import { Text, View, Image, TextInput, ActivityIndicator, TouchableOpacity } from "react-native";
+import { Text, View, Image, TextInput, ActivityIndicator, TouchableOpacity, StatusBar, Switch } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import SelectDropdown from "react-native-select-dropdown";
-import { ArrowDownUp, MoveRight } from "lucide-react-native";
+import { ArrowDownUp, MoveRight, Sun, Moon } from "lucide-react-native";
 
 import logo from "@assets/logo.png";
 
 import Divider from "@components/Divider";
 import Modal from "@components/Modal";
+
+import { useTheme } from "@context/ThemeProvider";
 
 export default function Home() {
     const [borderStyleTopInput, setBorderStyleTopInput] = useState("border border-gray-300");
@@ -35,6 +37,9 @@ export default function Home() {
     const [descriptionModal, setDescriptionModal] = useState('');
 
     const [loading, setLoading] = useState(false);
+
+    const { theme, toggleTheme } = useTheme();
+    const colorFixed = theme === "dark" ? "#FFF" : "#0F172A";
 
     async function handleConversion() {
         if (!inputValue) {
@@ -76,9 +81,22 @@ export default function Home() {
     };
 
     return (
-        <SafeAreaView className="flex-1 w-full items-center justify-center bg-gray-400">
-            <Image source={logo} className="mt-[40px] w-[140px] h-[32px]" />
+        <SafeAreaView className="flex-1 w-full items-center justify-center bg-gray-400 dark:bg-gray-80">
+            <StatusBar 
+                barStyle={theme === "dark" ? "light-content" : "dark-content"}
+                backgroundColor="transparent"
+                translucent
+            />
 
+            <Image source={logo} className="w-[140px] h-[32px] mt-5"/>
+            
+            <TouchableOpacity 
+                onPress={toggleTheme} 
+                className="p-3 rounded-full bg-purple-base ml-auto mr-5 mt-[-37px]"
+            >
+                {theme === "dark" ? <Moon color="white" size={24} /> : <Sun color="white" size={24} />}
+            </TouchableOpacity>
+            
             {/* MODAL */}
             <Modal  
                 isModalVisible={isModalVisible} 
@@ -91,16 +109,16 @@ export default function Home() {
             <View className="flex-1 w-full justify-center px-[20px] mb-[100px]">
                 {/* DESCRIÇÃO DA CONVERSÃO */}
                 <View className="flex-row items-center justify-center gap-4 mb-5">
-                    <Text className="font-bold text-md text-gray-100 ">{selectedCurrencyTop.name}</Text>
-                    <MoveRight color="black" />
-                    <Text className="font-bold text-md text-gray-100">{selectedCurrencyBottom.name}</Text>
+                    <Text className="font-bold text-md text-gray-100 dark:text-white">{selectedCurrencyTop.name}</Text>
+                    <MoveRight color={colorFixed}/>
+                    <Text className="font-bold text-md text-gray-100 dark:text-white">{selectedCurrencyBottom.name}</Text>
                 </View>
 
-                <View className="w-full px-[24px] py-[40px] bg-white shadow-xl shadow-black/50 rounded-xl">
+                <View className="w-full px-[24px] py-[40px] bg-white shadow-xl shadow-black/50 rounded-xl dark:bg-gray-90 dark:shadow-white/70 dark:border-[0.1px] dark:border-white">
                     {/* TITULO e SUBTITULO */}
                     <View className="gap-[8px]">
-                        <Text className="text-md font-semibold text-gray-100">Conversor de moedas</Text>
-                        <Text className="text-sm font-regular text-gray-200">
+                        <Text className="text-md font-semibold text-gray-100 dark:text-white">Conversor de moedas</Text>
+                        <Text className="text-sm font-regular text-gray-200 dark:text-gray-400">
                             Digite o valor e escolha as moedas de conversão
                         </Text>
                     </View>
@@ -108,12 +126,12 @@ export default function Home() {
                     <View className="w-full mt-[40px] items-center">
                         {/* INPUT */}
                         <View className={`w-full h-[56px] py-[16px] pl-[16px] rounded-xl flex-row items-center ${borderStyleTopInput}`}>
-                            <Text>{selectedCurrencyTop.simbol}</Text>
+                            <Text className="dark:text-white">{selectedCurrencyTop.simbol}</Text>
 
                             <TextInput
-                                className="flex-1 h-[56px] font-regular color-gray-100 text-[15px] ml-1"
+                                className="flex-1 h-[56px] font-regular color-gray-100 text-[15px] ml-1 dark:text-white"
                                 placeholder="Digite um valor"
-                                placeholderTextColor="#0F172A"
+                                placeholderTextColor={colorFixed}
                                 keyboardType="numeric"
                                 value={inputValue}
                                 onChangeText={(text) => {
@@ -137,7 +155,7 @@ export default function Home() {
                                 renderButton={(selectedItem) => (
                                     <View className="flex-row items-center justify-center h-[56px] w-[112px] rounded-xl">
                                         <Text>{selectedItem?.flag ?? "🌎"}</Text>
-                                        <Text className="ml-2 text-[15px]">{selectedItem?.code ?? "Selecione"}</Text>
+                                        <Text className="ml-2 text-[15px] dark:text-white">{selectedItem?.code ?? "Selecione"}</Text>
                                     </View>
                                 )}
                                 renderItem={(item) => (
@@ -167,9 +185,9 @@ export default function Home() {
 
                         {/* RESULT */}
                         <View className={`w-full h-[56px] py-[16px] pl-[16px] rounded-xl flex-row items-center border border-gray-300`}>
-                            <Text>{selectedCurrencyBottom.simbol}</Text>
+                            <Text className="dark:text-white">{selectedCurrencyBottom.simbol}</Text>
 
-                            <Text className="flex-1 font-regular color-gray-100 text-[15px] ml-2">
+                            <Text className="flex-1 font-regular color-gray-100 text-[15px] ml-2 dark:text-white">
                                 { convertedValue ? convertedValue : "Resultado" }
                             </Text>
 
@@ -187,7 +205,7 @@ export default function Home() {
                                 renderButton={(selectedItem) => (
                                     <View className="flex-row items-center justify-center h-[56px] w-[112px] rounded-xl">
                                         <Text>{selectedItem?.flag ?? "🌎"}</Text>
-                                        <Text className="ml-2 text-[15px]">{selectedItem?.code ?? "Selecione"}</Text>
+                                        <Text className="ml-2 text-[15px] dark:text-white">{selectedItem?.code ?? "Selecione"}</Text>
                                     </View>
                                 )}
                                 renderItem={(item) => (

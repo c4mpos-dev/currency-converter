@@ -1,6 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  // NOTE: Update this to include the paths to all of your component files.
   content: ["./App.{js,jsx,ts,tsx}", "./src/screens/*.{js,jsx,ts,tsx}", "./src/components/*.{js,jsx,ts,tsx}"],
   presets: [require("nativewind/preset")],
   theme: {
@@ -12,10 +11,12 @@ module.exports = {
           light: "#EDE9FE",
         },
         gray: {
-          400: "#F8FAFC",
+          400: "#F8FAFC", 
           300: "#94A3B8",
           200: "#334155",
-          100: "#0F172A",
+          100: "#0F172A", 
+          90: "#1a1a1a",
+          80: "#030303"
         },
       },
       fontFamily: {
@@ -32,4 +33,4 @@ module.exports = {
     },
   },
   plugins: [],
-}
+};
