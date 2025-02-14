@@ -9,8 +9,6 @@
 
 O **Currency Converter** é um aplicativo mobile desenvolvido em **React Native** que permite converter moedas de diversos países do mundo. Ele conta com um design moderno e suporta os temas **claro e escuro**, utilizando **NativeWind** para estilização. Além disso, ele utiliza a **Awesome API** para obter taxas de câmbio em tempo real.
 
----
-
 ## 🚀 Tecnologias Utilizadas
 
 O projeto foi desenvolvido com as seguintes tecnologias:
